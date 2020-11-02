@@ -72,4 +72,18 @@ public class UserRegistrationTest {
 		boolean isPasswordValid = userRegistration.checkPassword("anikChowdhury123");
 		Assert.assertFalse(isPasswordValid);
 	}
+
+	@Test
+	public void testSampleEmail_WhenValid_ShouldReturnTrue() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isEmailValid = userRegistration.checkEmail("abc-100@abc.net");
+		Assert.assertTrue(isEmailValid);
+	}
+	
+	@Test
+	public void testSampleEmail_WhenInvalid_ShouldReturnFalse() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isEmailValid = userRegistration.checkEmail("abc@gmail.com.1a");
+		Assert.assertFalse(isEmailValid);
+	}
 }
