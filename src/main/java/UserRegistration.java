@@ -1,9 +1,9 @@
 
 public class UserRegistration {
 	
-	public static final String FIRST_NAME_PATTERN = "^[A-Z][a-z]{2,}$";
+	public static final String NAME_PATTERN = "^[A-Z][a-z]{2,}$";
 	
-	public boolean checkFirstName(String fName) {
-		return (fName.matches(FIRST_NAME_PATTERN));
+	public boolean checkName(String name) {
+		return (name.matches(NAME_PATTERN));
 	}
 }
