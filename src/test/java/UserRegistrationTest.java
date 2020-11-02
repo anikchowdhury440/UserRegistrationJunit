@@ -86,4 +86,18 @@ public class UserRegistrationTest {
 		boolean isEmailValid = userRegistration.checkEmail("abc@gmail.com.1a");
 		Assert.assertFalse(isEmailValid);
 	}
+	
+	@Test
+	public void mood_Analyser_Test_Happy() {
+		UserRegistration userRegistration = new UserRegistration();
+		String isMoodHappy = userRegistration.moodAnalyse("Anik", "Chowdhury", "anik@gmail.com", "91 9999999999", "Anik@1234");
+        Assert.assertEquals("HAPPY", isMoodHappy);
+    }
+
+    @Test
+    public void mood_Analyser_Test_Sad() {
+        UserRegistration userRegistration = new UserRegistration();
+        String isMoodSad = userRegistration.moodAnalyse("Anik", "Chowdhury", "anik@gmail.com", "9999999999", "Anik1234");
+        Assert.assertEquals("SAD", isMoodSad);
+    }
 }

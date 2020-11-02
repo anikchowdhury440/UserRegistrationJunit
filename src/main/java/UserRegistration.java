@@ -21,4 +21,13 @@ public class UserRegistration {
 	public boolean checkPassword(String password) {
 		return (password.matches(PASSWORD_PATTERN));
 	}
+	
+	public String moodAnalyse(String fName, String lName, String email, String mobile, String password ) {
+		if(checkName(fName) == true && checkName(lName) == true && checkEmail(email) == true && checkMobile(mobile) == true && checkPassword(password) == true) {
+			return "HAPPY";
+		}
+		else {
+			return "SAD";
+		}
+	}
 }
