@@ -58,4 +58,18 @@ public class UserRegistrationTest {
 		boolean isMobileValid = userRegistration.checkMobile("998877665544");
 		Assert.assertFalse(isMobileValid);
 	}
+	
+	@Test
+	public void testUserPassword_WhenValid_ShouldReturnTrue() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isPasswordValid = userRegistration.checkPassword("anik12345");
+		Assert.assertTrue(isPasswordValid);
+	}
+	
+	@Test
+	public void testUserPassword_WhenInvalid_ShouldReturnFalse() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isPasswordValid = userRegistration.checkPassword("anik123");
+		Assert.assertFalse(isPasswordValid);
+	}
 }
