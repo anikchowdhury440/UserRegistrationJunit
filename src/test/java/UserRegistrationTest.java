@@ -30,4 +30,18 @@ public class UserRegistrationTest {
 		boolean isLNameValid = userRegistration.checkName("anik");
 		Assert.assertFalse(isLNameValid);
 	}
+	
+	@Test
+	public void testUserEmail_WhenValid_ShouldReturnTrue() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isEmailValid = userRegistration.checkEmail("anik@gmail.com");
+		Assert.assertTrue(isEmailValid);
+	}
+	
+	@Test
+	public void testUserEmail_WhenInvalid_ShouldReturnFalse() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isEmailValid = userRegistration.checkEmail("anik@.com");
+		Assert.assertFalse(isEmailValid);
+	}
 }
