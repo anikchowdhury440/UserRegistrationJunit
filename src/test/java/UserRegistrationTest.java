@@ -44,4 +44,18 @@ public class UserRegistrationTest {
 		boolean isEmailValid = userRegistration.checkEmail("anik@.com");
 		Assert.assertFalse(isEmailValid);
 	}
+	
+	@Test
+	public void testUserMobile_WhenValid_ShouldReturnTrue() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isMobileValid = userRegistration.checkMobile("91 9999999999");
+		Assert.assertTrue(isMobileValid);
+	}
+	
+	@Test
+	public void testUserMobile_WhenInvalid_ShouldReturnFalse() {
+		UserRegistration userRegistration = new UserRegistration();
+		boolean isMobileValid = userRegistration.checkMobile("998877665544");
+		Assert.assertFalse(isMobileValid);
+	}
 }
