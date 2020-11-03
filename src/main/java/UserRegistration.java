@@ -6,28 +6,83 @@ public class UserRegistration {
 	public static final String MOBILE_PATTERN = "^[0-9]{1,2}[ ][0-9]{10}$";
 	public static final String PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[*.!@#$%^&(){}:'<>,.>/~`_+=|].).{8,}$";
 	
-	public boolean checkName(String name) {
-		return (name.matches(NAME_PATTERN));
-	}
-	
-	public boolean checkEmail(String email) {
-		return (email.matches(EMAIL_PATTERN));
-	}
-	
-	public boolean checkMobile(String mobile) {
-		return (mobile.matches(MOBILE_PATTERN));
-	}
-	
-	public boolean checkPassword(String password) {
-		return (password.matches(PASSWORD_PATTERN));
-	}
-	
-	public String moodAnalyse(String fName, String lName, String email, String mobile, String password ) {
-		if(checkName(fName) == true && checkName(lName) == true && checkEmail(email) == true && checkMobile(mobile) == true && checkPassword(password) == true) {
-			return "HAPPY";
+	public String checkName(String name) throws UserRegistrationInvalidException {
+		try {
+			if(name.matches(NAME_PATTERN)) {
+				return "Valid";
+			}
+			else {
+				throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_INVALID, "Please Enter Valid Name");
+			}
 		}
-		else {
-			return "SAD";
+		catch (NullPointerException e) {
+			throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_NULL, "Please Don't Enter Null Value");
+		}
+	}
+	
+	public String checkEmail(String email) throws UserRegistrationInvalidException {
+		try {
+			if(email.matches(EMAIL_PATTERN)) {
+				return "Valid";
+			}
+			else {
+				throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_INVALID, "Please Enter Valid Email");
+			}
+		}
+		catch (NullPointerException e) {
+			throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_NULL, "Please Don't Enter Null Value");
+		}
+	}
+	
+	public String checkMobile(String mobile) throws UserRegistrationInvalidException {
+		try {
+			if(mobile.matches(MOBILE_PATTERN)) {
+				return "Valid";
+			}
+			else {
+				throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_INVALID, "Please Enter Valid Mobile");
+			}
+		}
+		catch (NullPointerException e) {
+			throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_NULL, "Please Don't Enter Null Value");
+		}
+	}
+	
+	public String checkPassword(String password) throws UserRegistrationInvalidException {
+		try {
+			if(password.matches(PASSWORD_PATTERN)) {
+				return "Valid";
+			}
+			else {
+				throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_INVALID, "Please Enter Valid Password");
+			}
+		}
+		catch (NullPointerException e) {
+			throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_NULL, "Please Don't Enter Null Value");
+		}
+	}
+	
+	public String moodAnalyse(String fName, String lName, String email, String mobile, String password ) throws UserRegistrationInvalidException {
+		try {
+			if(checkName(fName) == "Valid" && checkName(lName) == "Valid" && checkEmail(email) == "Valid" && checkMobile(mobile) == "Valid" && checkPassword(password) == "Valid") {
+				return "HAPPY";
+			}
+			else {
+				throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_INVALID, "Please Enter Valid Password");
+			}
+		}
+		catch (NullPointerException e) {
+			throw new UserRegistrationInvalidException(UserRegistrationInvalidException.ExceptionType.ENTERED_NULL, "Please Don't Enter Null Value");
+		}
+	}
+	
+	public static void main(String[] args) {
+		UserRegistration userRegistration = new UserRegistration();
+		try {
+			System.out.println(userRegistration.checkName("anik"));
+		} catch (UserRegistrationInvalidException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

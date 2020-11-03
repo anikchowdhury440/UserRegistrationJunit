@@ -9,9 +9,9 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class UserRegistrationParamTest {
 	private String emails;
-	private boolean expectedResult;
+	private String expectedResult;
 	
-	public UserRegistrationParamTest(String emails, boolean expectedResult) {
+	public UserRegistrationParamTest(String emails, String expectedResult) {
 		this.emails = emails;
 		this.expectedResult = expectedResult;
 	}
@@ -19,35 +19,41 @@ public class UserRegistrationParamTest {
 	@Parameterized.Parameters
 	public static Collection input(){
 		return Arrays.asList(new Object[][]{
-				{"abc@yahoo.com", true},
-				{"abc-100@yahoo.com", true},
-				{"abc.100@yahoo.com", true},
-				{"abc111@abc.com", true},
-				{"abc-100@abc.net", true},
-				{"abc.100@abc.com.au", true},
-				{"abc@1.com", true},
-				{"abc@gmail.com.com", true},
-				{"abc+100@gmail.com", true},
-				{"abc", false},
-				{"abc@.com.my", false},
-				{"abc123@gmail.a", false},
-				{"abc123@.com", false},
-				{"abc123@.com.com", false},
-				{".abc@abc.com", false},
-				{"abc()*@gmail.com", false},
-				{"abc@%*.com", false},
-				{"abc..2002@gmail.com", false},
-				{"abc.@gmail.com", false},
-				{"abc@abc@gmail.com", false},
-				{"abc@gmail.com.1a", false},
-				{"abc@gmail.com.aa.au", false}
+				{"abc@yahoo.com", "Valid"},
+				{"abc-100@yahoo.com", "Valid"},
+				{"abc.100@yahoo.com", "Valid"},
+				{"abc111@abc.com", "Valid"},
+				{"abc-100@abc.net", "Valid"},
+				{"abc.100@abc.com.au", "Valid"},
+				{"abc@1.com", "Valid"},
+				{"abc@gmail.com.com", "Valid"},
+				{"abc+100@gmail.com", "Valid"},
+				{"abc" , "ENTERED_INVALID"},
+				{"abc@.com.my", "ENTERED_INVALID"},
+				{"abc123@gmail.a", "ENTERED_INVALID"},
+				{"abc123@.com", "ENTERED_INVALID"},
+				{"abc123@.com.com", "ENTERED_INVALID"},
+				{".abc@abc.com", "ENTERED_INVALID"},
+				{"abc()*@gmail.com", "ENTERED_INVALID"},
+				{"abc@%*.com", "ENTERED_INVALID"},
+				{"abc..2002@gmail.com", "ENTERED_INVALID"},
+				{"abc.@gmail.com", "ENTERED_INVALID"},
+				{"abc@abc@gmail.com", "ENTERED_INVALID"},
+				{"abc@gmail.com.1a", "ENTERED_INVALID"},
+				{"abc@gmail.com.aa.au", "ENTERED_INVALID"}
 		});
 	}
 	
 	@Test
 	public void testEmails() {
 		UserRegistration userRegistration = new UserRegistration();
-		Assert.assertEquals(expectedResult, userRegistration.checkEmail(emails));
+		String email = null;
+		try {
+			email = userRegistration.checkEmail(emails);
+			Assert.assertEquals(expectedResult,email);
+		} catch (UserRegistrationInvalidException e) {
+			Assert.assertEquals(expectedResult,String.valueOf(e.type));
+		}
 	}
 }
 
