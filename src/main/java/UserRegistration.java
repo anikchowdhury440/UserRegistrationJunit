@@ -76,13 +76,4 @@ public class UserRegistration {
 		}
 	}
 	
-	public static void main(String[] args) {
-		UserRegistration userRegistration = new UserRegistration();
-		try {
-			System.out.println(userRegistration.checkName("anik"));
-		} catch (UserRegistrationInvalidException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
